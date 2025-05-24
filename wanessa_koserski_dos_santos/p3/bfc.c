@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <locale.h>
 
-// generate Brainfuck code that sets memory[0] to the result
 void bf_set(int value) {
-    // clear the cell
     printf("[-]"); 
-    
     for (int i = 0; i < value; i++) {
         printf("+");
     }
@@ -16,16 +14,40 @@ void bf_set(int value) {
 int evaluate_expression(char *expr);
 
 int main(int argc, char *argv[]) {
+    setlocale(LC_ALL, "en_US.UTF-8");
+
     if (argc != 2) {
         fprintf(stderr, "Uso: %s \"expressao\"\n", argv[0]);
         return 1;
     }
 
-    char *expr = argv[1];
-    int result = evaluate_expression(expr);
+    char *input = argv[1];
+    char *equals = strchr(input, '=');
 
-    
-    bf_set(result);
+    if (equals == NULL) {
+        // simples expression
+        int result = evaluate_expression(input);
+        printf("VALOR:");
+        bf_set(result);
+    } else {
+        // expression with variable
+        *equals = '\0';
+        char *var_name = input;
+        char *expr = equals + 1;
+
+        // clean variable
+        while (*var_name == ' ') var_name++;
+        char *end = var_name + strlen(var_name) - 1;
+        while (end > var_name && *end == ' ') end--;
+        *(end + 1) = '\0';
+
+        int result = evaluate_expression(expr);
+
+        // "VAR:VALUE:" format
+        printf("VAR:%s:", var_name);
+        bf_set(result);
+    }
+
     return 0;
 }
 

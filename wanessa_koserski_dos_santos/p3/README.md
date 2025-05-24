@@ -29,15 +29,15 @@ output: 13
 ```
 ---------
 ```bash
-./bfc "10 / 2 - 1" | ./bfe
+./bfc "Débito = 10 / 2 - 1" | ./bfe
 ```
 ```bash
-output: 4
+output: Débito = 4
 ```
 ---------
 ```bash
-./bfc "2 * (3 + 4)" | ./bfe
+./bfc "Coração = 2 * (3 + 4)" | ./bfe
 ```
 ```bash
-output:14
+output: Coração = 14
 ```
