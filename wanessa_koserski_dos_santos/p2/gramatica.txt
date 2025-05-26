@@ -1,0 +1,45 @@
+<programa> ::= "beginProgram" <nl> <bloco> "endProgram" <nl>?
+
+<bloco> ::= (<linha_comando>)* (<chamada_show_line>)?
+
+<linha_comando> ::= <declaracao_variavel_line>
+                 | <atribuicao_line>
+                 | <condicional>
+
+<declaracao_variavel_line> ::= <tipo> <ws> <identificador> (<ws>? "=" <ws>? <expressao>)? <ws>? ";" <nl>
+
+<atribuicao_line> ::= <identificador> <ws>? "=" <ws>? <expressao> <ws>? ";" <nl>
+
+<condicional> ::= "beginIf" <ws>? "(" <expressao_logica> ")" <nl> <bloco> "endIf" <nl>?
+
+<chamada_show_line> ::= "show" <ws>? "(" <expressao> ")" <ws>? <nl>
+
+<expressao_logica> ::= <expressao> (<ws>? <operador_relacional> <ws>? <expressao>)?
+
+<operador_relacional> ::= "==" | "!=" | "<" | ">" | "<=" | ">="
+
+<expressao> ::= <termo> ( <ws>? ("+" | "-") <ws>? <termo> )*
+<termo> ::= <fator> ( <ws>? ("*" | "/") <ws>? <fator> )*
+<fator> ::= "(" <ws>? <expressao> <ws>? ")" 
+         | <numero> 
+         | <identificador>
+
+<numero> ::= <positivo> | <negativo>
+<positivo> ::= <inteiro> <fracao>? <cientifico>?
+<negativo> ::= "-" <positivo>
+<fracao> ::= "." <digito>+
+<cientifico> ::= "e" "-"? <digito>+
+
+<inteiro> ::= "0" | <digito_nao_zero> <digito>*
+
+<tipo> ::= "int" | "float"
+
+<identificador> ::= <letra> <letra_ou_digito>*
+<letra_ou_digito> ::= <letra> | <digito> | "_"
+<letra> ::= ([a-z] | [A-Z])+
+
+<digito> ::= [0-9]
+<digito_nao_zero> ::= [1-9]
+
+<ws> ::= (" " | "\t")*
+<nl> ::= "\n"

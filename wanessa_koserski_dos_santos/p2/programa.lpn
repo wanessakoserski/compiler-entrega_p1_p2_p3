@@ -1,0 +1,11 @@
+beginProgram 
+	int variavel_inteira = 10;
+	float variavel_float = 2.2;
+	float resultado = 0;
+
+	beginIf (variavel_inteira >= 1) 
+		resultado = variavel_float * variavel_inteira;
+	endIf
+
+	show (resultado)
+endProgram
