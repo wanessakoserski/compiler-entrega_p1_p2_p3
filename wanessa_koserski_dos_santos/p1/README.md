@@ -2,12 +2,6 @@
 
 Wanessa Koserski dos Santos
 
-### Compilar programa
-```
-gcc -o compiler compiler.c
-./compiler programa.lpn assembly.asm
-```
-
 ### Criar binário 
 ```
 gcc -o assembler assembler.c
